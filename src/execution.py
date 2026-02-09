@@ -6,10 +6,7 @@ from database_manager import log_trade
 api = get_connection()
 
 def is_already_holding(symbol):
-    """
-    WEEK 2 STATE MANAGEMENT: 
-    Checks if we already own the stock to prevent 'double-buying'.
-    """
+   ## Checks if we already own the stock to prevent double buying
     positions = api.list_positions()
     for position in positions:
         if position.symbol == symbol:
@@ -17,10 +14,8 @@ def is_already_holding(symbol):
     return False
 
 def place_buy_order(symbol, qty):
-    """
-    WEEK 3 EXECUTION:
-    Sends a buy order to Alpaca and logs it to our SQLite database.
-    """
+  
+   ## Sends a buy order to Alpaca and logs it to our SQLite database.
     if is_already_holding(symbol):
         print(f"⚠️ Already holding {symbol}. Skipping purchase to prevent duplicate trades.")
         return None
